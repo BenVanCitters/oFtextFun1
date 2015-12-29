@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "97764786D9B1213B095082112B1BC6C86CA6C0A0",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "97764786D9B1213B095082112B1BC6C86CA6C0A0" : 0,
+    "DC82B647947D3C7287EC6F63265D530BFA643921" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "4A839B19-DBA8-469B-B1AB-8EFA5E0A453B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "97764786D9B1213B095082112B1BC6C86CA6C0A0" : "myApps\/",
+    "DC82B647947D3C7287EC6F63265D530BFA643921" : "..\/.."
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "textFun1",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "textFun1\/textFun1.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/BenVanCitters\/CherryBlossom.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "97764786D9B1213B095082112B1BC6C86CA6C0A0"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/BenVanCitters\/IOC_Walls.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DC82B647947D3C7287EC6F63265D530BFA643921"
+    }
+  ]
+}
