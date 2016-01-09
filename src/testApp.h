@@ -19,6 +19,11 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
+    void origDraw();
+    void draw1();
+    void draw2();
+    void draw3();
+    
     ofTrueTypeFont testFont;
     ofTrueTypeFont testFont2;
     ofTTFCharacter testChar;

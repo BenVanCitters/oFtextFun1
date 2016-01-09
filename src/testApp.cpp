@@ -7,9 +7,9 @@ void testApp::setup()
     ofSetFullscreen(false);
 //    ofSetBackgroundAuto(false);
     testFont.loadFont("Papyrus.ttc", 250, true, true, true);
-    testFont2.loadFont("cooperBlack.ttf", 160, true, true, true);
+    testFont2.loadFont("Modern No. 20", 160, true, true, true);
     
-    letters = "VOXMOD";
+    letters = "4096";
     
     int addedPointCounter = 0;
     int countourPoints = 0;
@@ -19,7 +19,7 @@ void testApp::setup()
         letter = letters[lt];
         testChar = testFont2.getCharacterAsPoints(letter);
         
-        float maxDist = .1;
+        float maxDist = .005;
         float maxXforLetter = 0;
         for(int k = 0; k <(int)testChar.getOutline().size(); k++)
         {
@@ -80,21 +80,92 @@ void testApp::setup()
 void testApp::update(){
 
 }
+void testApp::draw1()
+{
+    
+}
+void testApp::draw2()
+{
+    
+}
+void testApp::draw3()
+{
 
-//--------------------------------------------------------------
-void testApp::draw()
+    ofFill();
+    ofEnableDepthTest();
+//    ofDrawBitmapString("fps: "+ofToString(ofGetFrameRate()), 10, 10);
+    
+    float tm = 0;
+    
+    float ampl = 3000;
+    int lettersToDraw =points.size();//(int)(points.size()*ofGetMouseX()*1.f/ofGetWindowWidth());
+    //    lettersToDraw = MIN(lettersToDraw,points.size());
+    
+    
+    ofTranslate(ofGetWindowWidth()/2-180, -25,-200);
+    ofRotateX(30);//ofGetElapsedTimef()*50);//
+    
+//    ofSetLineWidth(3);
+    
+    int snSteps = (ofGetMouseX()*1000)/ofGetWindowWidth();
+    float xpct = max(ofGetMouseX()*1.f/ofGetWindowWidth(), 0.f);
+    for(int k = 0; k < snSteps; k++)
+    {
+//        if(k>1r0)
+            ofNoFill();
+
+        ofPushMatrix();
+        float kPct = k*1.f/snSteps;
+        
+        ofTranslate(0, 0, -(pow(kPct, 1.7f))*1500);
+
+        float sn = 1-(1+cosf(pow(kPct, 1.7f)*PI))/2.f;
+        float xDist = ampl*sn;
+        float yDist = .2*ampl*ofGetMouseY()/ofGetWindowHeight();
+        ofSetColor(255*(1+sinf(kPct*125))/2.f,
+                   0,
+                   0,
+                   255 );
+        ofBeginShape();
+        for(int i = 0; i < lettersToDraw; i++)
+        {
+            for(int j = 0; j < points[i].size(); j++)
+            {
+                ofVec3f v = points[i][j];
+                float pct = j*1.f/points[i].size();
+                float rAngle = tm+pct*4*TWO_PI;
+                float distortion = sin(tm*5 + (j*yDist/points[i].size()) );
+                distortion *= distortion* distortion* distortion;
+                distortion *= xDist;
+                
+                ofVec3f offs(distortion*cos(rAngle),distortion*sin(rAngle));
+                
+                float nof = max(0.0001f,(1-kPct)*25);
+                float amp = kPct*55;
+                ofVec3f nOffs(amp*sn*cos(pct+(v.x + offs.x)/nof),amp*sn*sin(pct+(v.y + offs.y)/nof));
+                ofVertex(v.x + offs.x + nOffs.x,
+                         v.y + offs.y+nOffs.y);
+            }
+            ofNextContour(true) ;
+        }
+        ofEndShape( true );
+        ofPopMatrix();
+    }
+
+}
+void testApp::origDraw()
 {
     ofSetColor(255, 100, 200,190 );
     ofFill();
-
+    
     ofDrawBitmapString("fps: "+ofToString(ofGetFrameRate()), 10, 10);
-
+    
     float tm = ofGetElapsedTimef();
     
     int amt =(int)(points.size()*ofGetMouseX()/ofGetWindowWidth());
     float ampl = 300;
     int lettersToDraw =points.size();//(int)(points.size()*ofGetMouseX()*1.f/ofGetWindowWidth());
-//    lettersToDraw = MIN(lettersToDraw,points.size());
+    //    lettersToDraw = MIN(lettersToDraw,points.size());
     float xDist = ampl*ofGetMouseX()/ofGetWindowWidth();
     float yDist = ampl*ofGetMouseY()/ofGetWindowHeight();
     ofNoFill();
@@ -109,14 +180,14 @@ void testApp::draw()
         for(int j = 0; j < points[i].size(); j++)
         {
             ofVec3f v = points[i][j];
-//            ofVertex(v.x + xDist*sin(3*tm+v.y/5.f),
-//                     v.y + yDist*sin(3*tm+v.x/50.f));
+            //            ofVertex(v.x + xDist*sin(3*tm+v.y/5.f),
+            //                     v.y + yDist*sin(3*tm+v.x/50.f));
             float rAngle = tm+j*4*TWO_PI/points[i].size(); //ofRandom(TWO_PI);
-//            float rRad = ofRandom(TWO_PI);
+            //            float rRad = ofRandom(TWO_PI);
             float distortion = sin(tm*5 + (j*yDist/points[i].size()) );
             distortion *= distortion* distortion* distortion;
             distortion *= xDist;
-//            ofSetColor(255, 100, 200,80/xDist );
+            //            ofSetColor(255, 100, 200,80/xDist );
             ofVec3f offs(distortion*cos(rAngle),distortion*sin(rAngle));
             ofVertex(v.x + offs.x,
                      v.y + offs.y);
@@ -128,7 +199,17 @@ void testApp::draw()
 }
 
 //--------------------------------------------------------------
+void testApp::draw()
+{
+//    draw3();
+    origDraw();
+}
+
+
+
+//--------------------------------------------------------------
 void testApp::keyPressed(int key){
+    ofSaveFrame();
 
 }
 
